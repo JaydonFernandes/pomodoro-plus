@@ -7,7 +7,14 @@ import { Divider, Typography, ButtonGroup, Button, Container } from '@material-u
 import Timer from 'easytimer.js';
 import 'fontsource-roboto';
 
+import useSound from 'use-sound';
+import clickSfx from "./assets/soundEffects/click.mp4"
+import completeSfx from "./assets/soundEffects/complete.mp4"
+
 function App() {
+
+  const [playClickSfx] = useSound(clickSfx);
+  const [playCompleteSfx] = useSound(completeSfx);
 
   const [timerType, setTimerType] = useState("pomodoro");
   const [pomodoroTime, setPomodoroTime] = useState(localStorage.getItem('pomodoroTime') ? parseInt(localStorage.getItem('pomodoroTime')): 25);
@@ -19,6 +26,10 @@ function App() {
   const [clockMinutes, setClockMinutes] = useState(time);
   const [clockSeconds, setClockSeconds] = useState(0);
   const [isPaused, setIsPaused] = useState(true);
+  const [longBreakInterval, setLongBreakInterval] = useState(localStorage.getItem('longBreakInterval') ? parseInt(localStorage.getItem('longBreakInterval')): 4);
+  const [pomodorosComplete, setPomodorosComplete] = useState(0);
+
+  const [autoStartRound, setAutoStartRound] = useState((localStorage.getItem('autoStartRound') === "true") ? true: false);
 
   const zeroPad = (num, places) => String(num).padStart(places, '0');
 
@@ -26,10 +37,20 @@ function App() {
     console.log("tick..")
     document.title = (clockMinutes+":"+zeroPad(clockSeconds, 2))
     if ( (timer.getTimeValues().minutes<=0) && (timer.getTimeValues().seconds<=0) && (clockMinutes <= 0)){
+      playCompleteSfx();
       console.log("done")
       
       if (timerType === "pomodoro"){
-        setTimerType("shortBreak")
+        setPomodorosComplete(pomodorosComplete + 1)
+
+        console.log("Modulo: "+ ((pomodorosComplete + 1) % longBreakInterval))
+
+        if ( ((pomodorosComplete + 1) % longBreakInterval) === 0 ){
+          console.log("starting long break")
+          setTimerType("longBreak")
+        }else{
+          setTimerType("shortBreak")
+        }
         console.log("completed pomodoro")
       }else{
         setTimerType("pomodoro")
@@ -68,8 +89,12 @@ function App() {
     }
 
     timer.reset();
-    timer.pause();
-    setIsPaused(true);
+
+    if (!autoStartRound){
+      timer.pause();
+      setIsPaused(true);
+    }
+    
 
   }, [timerType]);
 
@@ -115,7 +140,17 @@ function App() {
     
   }, [pomodoroTime, shortBreakTime, longBreakTime]);
 
+  useEffect(() => {
+    localStorage.setItem('longBreakInterval', longBreakInterval);
+  }, [longBreakInterval]);
+
+  useEffect(() => {
+    console.log("updating auto start to "+autoStartRound)
+    localStorage.setItem('autoStartRound', autoStartRound);
+  }, [autoStartRound]);
+
   var resetClock = function(){
+    playClickSfx();
     timer.start({countdown: true, startValues: {minutes: time}});
     timer.reset();
     timer.pause();
@@ -123,6 +158,7 @@ function App() {
   }
 
   var toggleStart = function(){
+    playClickSfx();
     if (isPaused){
       timer.start({countdown: true, startValues: {minutes: time}});
       setIsPaused(false);
@@ -176,10 +212,14 @@ function App() {
           pomodoroTime={pomodoroTime}
           shortBreakTime={shortBreakTime}
           longBreakTime={longBreakTime}
+          longBreakInterval={longBreakInterval}
+          autoStartRound={autoStartRound}
 
           setPomodoroTime={setPomodoroTime}
           setShortBreakTime={setShortBreakTime}
           setLongBreakTime={setLongBreakTime}
+          setLongBreakInterval={setLongBreakInterval}
+          setAutoStartRound={setAutoStartRound}
 
           open={open} 
           onClose={handleClose} />
