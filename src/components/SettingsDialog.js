@@ -11,6 +11,7 @@ import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch'
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
   avatar: {
@@ -45,7 +46,7 @@ function SettingsDialog(props) {
     };
 
     return (
-        <Dialog onClose={handleClose} aria-labelledby="settings-dialog-title" open={open} >
+        <Dialog onClose={handleClose} scroll="paper" aria-labelledby="settings-dialog-title" open={open} >
             <DialogTitle id="settings-dialog-title">Settings</DialogTitle>
             
 
@@ -53,7 +54,58 @@ function SettingsDialog(props) {
 
                 <div>
                     
-                    <div style={{ textAlign: "center"}}>
+                    <Grid container spacing={1} justify="center">
+                        <Grid item sm={4} xs={12} style={{textAlign: "center"}}>
+                            <TextField
+                                style={{width: "100%"}}
+                                label="Pomodoro Time"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+
+                                margin="normal"
+                                variant="outlined"
+                                defaultValue={pomodoroTime}
+                                onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempPomodoroTime(parseInt(e.target.value)) :  setTempPomodoroTime(parseInt(pomodoroTime))}}
+                            />
+                        </Grid>
+
+                        <Grid item sm={4} xs={12} style={{textAlign: "center"}}>
+                            <TextField
+                                style={{width: "100%"}}
+                                label="Short Break Time"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                
+                                margin="normal"
+                                min="1"
+                                variant="outlined"
+                                defaultValue={shortBreakTime}
+                                onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempShortBreakTime(parseInt(e.target.value)) :  setTempShortBreakTime(parseInt(shortBreakTime))}}
+                            />
+                        </Grid>
+
+                        <Grid item sm={4} xs={12} style={{textAlign: "center"}}>
+                            <TextField
+                                style={{width: "100%"}}
+                                label="Long Break Time"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                margin="normal"
+                                variant="outlined"
+                                defaultValue={longBreakTime}
+                                onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempLongBreakTime(parseInt(e.target.value)) :  setTempLongBreakTime(parseInt(longBreakTime))}}
+                            />
+                        </Grid>
+
+                    </Grid>
+                    
+                    {/* <div style={{textAlign: "center"}}>
                         <TextField
                             label="Pomodoro Time"
                             type="number"
@@ -62,7 +114,6 @@ function SettingsDialog(props) {
                             }}
 
                             margin="normal"
-                            style={{width: "30%", margin: ".5rem"}}
                             variant="outlined"
                             defaultValue={pomodoroTime}
                             onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempPomodoroTime(parseInt(e.target.value)) :  setTempPomodoroTime(parseInt(pomodoroTime))}}
@@ -75,9 +126,7 @@ function SettingsDialog(props) {
                             }}
                             
                             margin="normal"
-                            min="1"
                             variant="outlined"
-                            style={{width: "30%", margin: ".5rem"}}
                             defaultValue={shortBreakTime}
                             onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempShortBreakTime(parseInt(e.target.value)) :  setTempShortBreakTime(parseInt(shortBreakTime))}}
                         />
@@ -96,11 +145,10 @@ function SettingsDialog(props) {
                         
                             margin="normal"
                             variant="outlined"
-                            style={{width: "30%", margin: ".5rem"}}
                             defaultValue={longBreakTime}
                             onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempLongBreakTime(parseInt(e.target.value)) :  setTempLongBreakTime(parseInt(longBreakTime))}}
                         />
-                    </div>
+                    </div> */}
 
                     <Divider variant="middle" style={{margin: "1rem"}}/>
                         

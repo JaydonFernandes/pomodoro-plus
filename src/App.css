@@ -1,0 +1,7 @@
+.App{
+  position: absolute;
+  /* height: 200%; */
+  top: 0%;
+  min-width: 100%;
+  max-width: 100%;
+}
