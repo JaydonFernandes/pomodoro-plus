@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/poc-easytimer-react/static/css/main.a50f6183.chunk.css",
-    "main.js": "/poc-easytimer-react/static/js/main.b045830f.chunk.js",
-    "main.js.map": "/poc-easytimer-react/static/js/main.b045830f.chunk.js.map",
+    "main.js": "/poc-easytimer-react/static/js/main.3261acd5.chunk.js",
+    "main.js.map": "/poc-easytimer-react/static/js/main.3261acd5.chunk.js.map",
     "runtime-main.js": "/poc-easytimer-react/static/js/runtime-main.a9e6fd45.js",
     "runtime-main.js.map": "/poc-easytimer-react/static/js/runtime-main.a9e6fd45.js.map",
     "static/css/2.af4fd55d.chunk.css": "/poc-easytimer-react/static/css/2.af4fd55d.chunk.css",
@@ -28,6 +28,6 @@
     "static/css/2.af4fd55d.chunk.css",
     "static/js/2.8e84f6b3.chunk.js",
     "static/css/main.a50f6183.chunk.css",
-    "static/js/main.b045830f.chunk.js"
+    "static/js/main.3261acd5.chunk.js"
   ]
 }
