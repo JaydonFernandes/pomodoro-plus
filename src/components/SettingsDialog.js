@@ -46,7 +46,7 @@ function SettingsDialog(props) {
     };
 
     return (
-        <Dialog onClose={handleClose} scroll="paper" aria-labelledby="settings-dialog-title" open={open} >
+        <Dialog onClose={handleClose} scroll="body" aria-labelledby="settings-dialog-title" open={open} >
             <DialogTitle id="settings-dialog-title">Settings</DialogTitle>
             
 

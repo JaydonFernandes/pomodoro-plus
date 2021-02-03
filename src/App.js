@@ -28,7 +28,6 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-import purple from '@material-ui/core/colors/';
 
 function App() {
 
@@ -119,10 +118,12 @@ function App() {
     }
 
     timer.reset();
+    timer.pause();
+    setIsPaused(true);
 
-    if (!autoStartRound){
-      timer.pause();
-      setIsPaused(true);
+    if (autoStartRound){
+      timer.start();
+      setIsPaused(false);
     }
     
 
@@ -215,21 +216,22 @@ function App() {
 
   return (
     <div className="App" style={{ minHeight: "100%"}} >
-      <Container maxWidth="md">
+      <Container  maxWidth="md">
 
         <div style={{ textAlign: "center"}}>
 
           <div style={{display: "flex", justifyContent: "space-between", marginBottom: "auto", marginTop: "auto"}}>
 
-            <h1 style={{fontFamily: 'Roboto'}}>
+            <h1 style={{fontFamily: 'Roboto', color: "#3f51b5"}}>
               Pomodoro
             </h1>
 
-            <Button  startIcon={<SettingsIcon />} style={{margin: "1rem"}} onClick={handleClickOpen} variant="contained">Settings</Button>
+            <Button  color="primary" startIcon={<SettingsIcon />} style={{margin: "1rem"}} onClick={handleClickOpen} variant="contained">Settings</Button>
+           
 
           </div>
 
-          <Card style={{backgroundColor:"whitesmoke"}}>
+          <Card variant="outlined" style={{backgroundColor:"whitesmoke"}}>
             <CardContent>
               <ButtonGroup variant="contained" aria-label="contained primary button group" style={{marginBottom: "1rem", width: "100%"}}>
                 <Button onClick={()=>{setTimerType("pomodoro")}} style={{width: "100%"}} color={timerType === "pomodoro"? "primary": "default"}>Pomodoro</Button>
@@ -246,7 +248,7 @@ function App() {
                 })}
                 >
 
-                <Typography variant='h1'>
+                <Typography variant='h1'style={{color: "#181818"}}> 
                   {clockMinutes} : {zeroPad(clockSeconds, 2)} 
                 </Typography>
               </CircularProgressbarWithChildren>
@@ -258,12 +260,8 @@ function App() {
           </Card>
 
         </div>
-
-        
-        
-       
-        
       </Container>
+
       <SettingsDialog 
           pomodoroTime={pomodoroTime}
           shortBreakTime={shortBreakTime}
