@@ -57,7 +57,7 @@ function App() {
         console.log("completed break")
       }
     }
-  }, [clockSeconds]);
+  }, [clockSeconds, clockMinutes]);
 
   useEffect(() => {
     timer.addEventListener('secondsUpdated', function (e) {
