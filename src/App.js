@@ -53,7 +53,6 @@ function App() {
   const zeroPad = (num, places) => String(num).padStart(places, '0');
 
   useEffect(() => {
-    // document.title = (clockMinutes+":"+zeroPad(clockSeconds, 2))
     
     if(!isPaused){
       setSecondsPassed( ((time*60)-( (clockMinutes*60)+clockSeconds)) )
@@ -231,7 +230,7 @@ function App() {
 
           </div>
 
-          <Card variant="outlined" style={{backgroundColor:"whitesmoke"}}>
+          <Card  style={{backgroundColor:"whitesmoke"}}>
             <CardContent>
               <ButtonGroup variant="contained" aria-label="contained primary button group" style={{marginBottom: "1rem", width: "100%"}}>
                 <Button onClick={()=>{setTimerType("pomodoro")}} style={{width: "100%"}} color={timerType === "pomodoro"? "primary": "default"}>Pomodoro</Button>
@@ -242,13 +241,14 @@ function App() {
               
 
               <CircularProgressbarWithChildren
-                value={( (secondsPassed)/(time*60))*100}
+                value={100-(( (secondsPassed)/(time*60))*100)}
                 styles={buildStyles({
                   pathColor: "#3f51b5",
+                  // trailColor: "#858585"
                 })}
                 >
 
-                <Typography variant='h1'style={{color: "#181818"}}> 
+                <Typography variant='h1'style={{color: "#3f51b5"}}> 
                   {clockMinutes} : {zeroPad(clockSeconds, 2)} 
                 </Typography>
               </CircularProgressbarWithChildren>
