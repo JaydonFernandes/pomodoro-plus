@@ -248,7 +248,7 @@ function App() {
                 })}
                 >
 
-                <Typography variant='h1'style={{color: "#3f51b5"}}> 
+                <Typography variant='h1'style={{color: "black"}}> 
                   {clockMinutes} : {zeroPad(clockSeconds, 2)} 
                 </Typography>
               </CircularProgressbarWithChildren>
