@@ -1,33 +1,33 @@
 {
   "files": {
     "main.css": "/poc-easytimer-react/static/css/main.8e7e27b6.chunk.css",
-    "main.js": "/poc-easytimer-react/static/js/main.6bb26580.chunk.js",
-    "main.js.map": "/poc-easytimer-react/static/js/main.6bb26580.chunk.js.map",
-    "runtime-main.js": "/poc-easytimer-react/static/js/runtime-main.31b06865.js",
-    "runtime-main.js.map": "/poc-easytimer-react/static/js/runtime-main.31b06865.js.map",
+    "main.js": "/poc-easytimer-react/static/js/main.f0cb6da8.chunk.js",
+    "main.js.map": "/poc-easytimer-react/static/js/main.f0cb6da8.chunk.js.map",
+    "runtime-main.js": "/poc-easytimer-react/static/js/runtime-main.719fda14.js",
+    "runtime-main.js.map": "/poc-easytimer-react/static/js/runtime-main.719fda14.js.map",
     "static/css/2.af4fd55d.chunk.css": "/poc-easytimer-react/static/css/2.af4fd55d.chunk.css",
-    "static/js/2.c9caab37.chunk.js": "/poc-easytimer-react/static/js/2.c9caab37.chunk.js",
-    "static/js/2.c9caab37.chunk.js.map": "/poc-easytimer-react/static/js/2.c9caab37.chunk.js.map",
-    "static/js/3.f7f655b1.chunk.js": "/poc-easytimer-react/static/js/3.f7f655b1.chunk.js",
-    "static/js/3.f7f655b1.chunk.js.map": "/poc-easytimer-react/static/js/3.f7f655b1.chunk.js.map",
-    "static/js/4.9f0ad895.chunk.js": "/poc-easytimer-react/static/js/4.9f0ad895.chunk.js",
-    "static/js/4.9f0ad895.chunk.js.map": "/poc-easytimer-react/static/js/4.9f0ad895.chunk.js.map",
+    "static/js/2.4f267268.chunk.js": "/poc-easytimer-react/static/js/2.4f267268.chunk.js",
+    "static/js/2.4f267268.chunk.js.map": "/poc-easytimer-react/static/js/2.4f267268.chunk.js.map",
+    "static/js/3.71b3d2f9.chunk.js": "/poc-easytimer-react/static/js/3.71b3d2f9.chunk.js",
+    "static/js/3.71b3d2f9.chunk.js.map": "/poc-easytimer-react/static/js/3.71b3d2f9.chunk.js.map",
+    "static/js/4.00e3f722.chunk.js": "/poc-easytimer-react/static/js/4.00e3f722.chunk.js",
+    "static/js/4.00e3f722.chunk.js.map": "/poc-easytimer-react/static/js/4.00e3f722.chunk.js.map",
     "index.html": "/poc-easytimer-react/index.html",
     "service-worker.js": "/poc-easytimer-react/service-worker.js",
     "service-worker.js.map": "/poc-easytimer-react/service-worker.js.map",
     "static/css/2.af4fd55d.chunk.css.map": "/poc-easytimer-react/static/css/2.af4fd55d.chunk.css.map",
     "static/css/main.8e7e27b6.chunk.css.map": "/poc-easytimer-react/static/css/main.8e7e27b6.chunk.css.map",
-    "static/js/2.c9caab37.chunk.js.LICENSE.txt": "/poc-easytimer-react/static/js/2.c9caab37.chunk.js.LICENSE.txt",
-    "static/js/3.f7f655b1.chunk.js.LICENSE.txt": "/poc-easytimer-react/static/js/3.f7f655b1.chunk.js.LICENSE.txt",
+    "static/js/2.4f267268.chunk.js.LICENSE.txt": "/poc-easytimer-react/static/js/2.4f267268.chunk.js.LICENSE.txt",
+    "static/js/3.71b3d2f9.chunk.js.LICENSE.txt": "/poc-easytimer-react/static/js/3.71b3d2f9.chunk.js.LICENSE.txt",
     "static/media/click.38da6178.mp4": "/poc-easytimer-react/static/media/click.38da6178.mp4",
     "static/media/complete.8b65bc34.mp4": "/poc-easytimer-react/static/media/complete.8b65bc34.mp4",
     "static/media/index.css": "/poc-easytimer-react/static/media/roboto-vietnamese-400-normal.52cebac0.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.31b06865.js",
+    "static/js/runtime-main.719fda14.js",
     "static/css/2.af4fd55d.chunk.css",
-    "static/js/2.c9caab37.chunk.js",
+    "static/js/2.4f267268.chunk.js",
     "static/css/main.8e7e27b6.chunk.css",
-    "static/js/main.6bb26580.chunk.js"
+    "static/js/main.f0cb6da8.chunk.js"
   ]
 }
