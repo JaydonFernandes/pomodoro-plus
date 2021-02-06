@@ -1,8 +1,8 @@
 {
-  "name": "poc-easytimer-react",
+  "name": "pomodoro-plus",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jaydonfernandes.github.io/poc-easytimer-react",
+  "homepage": "https://jaydonfernandes.github.io/pomodoro-plus",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
