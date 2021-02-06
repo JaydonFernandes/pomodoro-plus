@@ -3,6 +3,7 @@ import './App.css';
 
 import SettingsDialog from "./components/SettingsDialog"
 import { Divider, Typography, ButtonGroup, Button, Container } from '@material-ui/core';
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -29,7 +30,11 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 
 
+
 function App() {
+
+  const muiTheme= createMuiTheme();
+  const [theme, setTheme] = useState(responsiveFontSizes(muiTheme));
 
   const [playClickSfx] = useSound(clickSfx);
   const [playCompleteSfx] = useSound(completeSfx);
@@ -83,21 +88,23 @@ function App() {
 
   useEffect(() => {
     timer.addEventListener('secondsUpdated', function (e) {
-      setClockMinutes(timer.getTimeValues().minutes)
+      setClockMinutes((timer.getTimeValues().hours*60) + timer.getTimeValues().minutes)
       setClockSeconds(timer.getTimeValues().seconds)
 
-      document.title = (timer.getTimeValues().minutes+":"+zeroPad(timer.getTimeValues().seconds, 2))
+      document.title = (((timer.getTimeValues().hours*60)+timer.getTimeValues().minutes)+":"+zeroPad(timer.getTimeValues().seconds, 2))
     });
 
     timer.addEventListener('reset', function (e) {
-      setClockMinutes(timer.getTimeValues().minutes)
+      setClockMinutes((timer.getTimeValues().hours*60) + timer.getTimeValues().minutes)
       setClockSeconds(timer.getTimeValues().seconds)
-      document.title = (timer.getTimeValues().minutes+":"+zeroPad(timer.getTimeValues().seconds, 2))
+      document.title = (((timer.getTimeValues().hours*60)+timer.getTimeValues().minutes)+":"+zeroPad(timer.getTimeValues().seconds, 2))
      
     });
   }, []);
 
   useEffect(() => {
+
+    var wasCompleted = (clockMinutes<=0 && clockSeconds<=0)
 
     timer.stop();
     if (timerType === "pomodoro"){
@@ -120,7 +127,7 @@ function App() {
     timer.pause();
     setIsPaused(true);
 
-    if (autoStartRound){
+    if (autoStartRound && wasCompleted){
       timer.start();
       setIsPaused(false);
     }
@@ -147,7 +154,7 @@ function App() {
       minutesGained = longBreakTime - time;
     }
 
-    var mins = timer.getTimeValues().minutes
+    var mins = ((timer.getTimeValues().hours*60) + timer.getTimeValues().minutes)
     var secs = timer.getTimeValues().seconds
 
     timer.stop();
@@ -196,11 +203,12 @@ function App() {
     }
   }
 
-  function PlayPauseButton(props) {
+
+  function PlayPauseIcon(props) {
     if (isPaused) {
-      return <IconButton aria-label="Play" onClick={toggleStart}><PlayIcon style={{ fontSize: 60 }}/></IconButton>
+      return <PlayIcon style={{ fontSize: 60 }}/>
     }
-    return <IconButton aria-label="Pause"  onClick={toggleStart}><PauseIcon style={{ fontSize: 60 }}/></IconButton>
+    return <PauseIcon style={{ fontSize: 60 }}/>
   }
 
   const [open, setOpen] = React.useState(false);
@@ -247,13 +255,20 @@ function App() {
                   // trailColor: "#858585"
                 })}
                 >
+                
+                <ThemeProvider theme={theme}>
+                  <Typography variant='h1'style={{color: "black"}}> 
+                    {clockMinutes} : {zeroPad(clockSeconds, 2)} 
+                  </Typography>
+                </ThemeProvider>
+                
 
-                <Typography variant='h1'style={{color: "black"}}> 
-                  {clockMinutes} : {zeroPad(clockSeconds, 2)} 
-                </Typography>
+
               </CircularProgressbarWithChildren>
 
-              <PlayPauseButton onClick={toggleStart}/>
+              <IconButton aria-label="PlayPause"  onClick={toggleStart}>
+                <PlayPauseIcon/>
+              </IconButton>
               <IconButton aria-label="Replay" onClick={resetClock}><ReplayIcon style={{ fontSize: 60 }}/></IconButton>
 
             </CardContent>

@@ -30,23 +30,70 @@ function SettingsDialog(props) {
     const [tempLongBreakInterval, setTempLongBreakInterval] = useState(longBreakInterval)
     const [tempAutoStartRound, setTempAutoStartRound] = useState(autoStartRound)
 
+    const [pomodoroValueError, setPomodoroValueError] = useState(false);
+    const [shortBreakValueError, setShortBreakValueError] = useState(false);
+    const [longBreakValueError, setLongBreakValueError] = useState(false);
+    const [longBreakIntervalValueError, setLongBreakIntervalValueError] = useState(false);
+
+    useEffect(() => {
+
+
+        if((tempPomodoroTime >= 1) && (tempPomodoroTime <= 60)){
+            setPomodoroValueError(false)
+        }else{
+            setPomodoroValueError(true)
+        }
+
+        if((tempShortBreakTime >= 1) && (tempShortBreakTime <= 60)){
+            setShortBreakValueError(false)
+        }else{
+            setShortBreakValueError(true)
+        }
+
+        if((tempLongBreakTime >= 1) && (tempLongBreakTime <= 60)){
+            setLongBreakValueError(false)
+        }else{
+            setLongBreakValueError(true)
+        }
+
+        if(tempLongBreakInterval > 0){
+            setLongBreakIntervalValueError(false)
+        }else{
+            setLongBreakIntervalValueError(true)
+        }
+
+
+    }, [tempPomodoroTime, tempShortBreakTime, tempLongBreakTime, tempLongBreakInterval]);
+
+    const handleEnter = function(){
+        setTempPomodoroTime(pomodoroTime)
+        setTempShortBreakTime(shortBreakTime)
+        setTempLongBreakTime(longBreakTime)
+        setTempLongBreakInterval(longBreakInterval)
+    }
 
     const handleClose = () => {
         onClose();
     };
 
-    const updateValues = function(){
+    const onSave = function(){
 
-        setPomodoroTime(tempPomodoroTime)
-        setShortBreakTime(tempShortBreakTime)
-        setLongBreakTime(tempLongBreakTime)
-        setLongBreakInterval(tempLongBreakInterval)
-        setAutoStartRound(tempAutoStartRound)
-        onClose();
+        if ( (!pomodoroValueError) && (!shortBreakValueError) && (!longBreakValueError) && (!longBreakIntervalValueError)){
+            setPomodoroTime(tempPomodoroTime)
+            setShortBreakTime(tempShortBreakTime)
+            setLongBreakTime(tempLongBreakTime)
+            setLongBreakInterval(tempLongBreakInterval)
+            setAutoStartRound(tempAutoStartRound)
+
+
+            onClose();
+        }
+
+        
     };
 
     return (
-        <Dialog onClose={handleClose} scroll="body" aria-labelledby="settings-dialog-title" open={open} >
+        <Dialog onClose={handleClose} onEnter={handleEnter} scroll="body" aria-labelledby="settings-dialog-title" open={open} >
             <DialogTitle id="settings-dialog-title">Settings</DialogTitle>
             
 
@@ -65,9 +112,11 @@ function SettingsDialog(props) {
                                 }}
 
                                 margin="normal"
+                                error = {pomodoroValueError}
+                                helperText="Value must be from 1 to 60."
                                 variant="outlined"
                                 defaultValue={pomodoroTime}
-                                onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempPomodoroTime(parseInt(e.target.value)) :  setTempPomodoroTime(parseInt(pomodoroTime))}}
+                                onChange={(e)=>{ setTempPomodoroTime(parseInt(e.target.value)) }}
                             />
                         </Grid>
 
@@ -81,10 +130,12 @@ function SettingsDialog(props) {
                                 }}
                                 
                                 margin="normal"
+                                error = {shortBreakValueError}
+                                helperText="Value must be from 1 to 60."
                                 min="1"
                                 variant="outlined"
                                 defaultValue={shortBreakTime}
-                                onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempShortBreakTime(parseInt(e.target.value)) :  setTempShortBreakTime(parseInt(shortBreakTime))}}
+                                onChange={(e)=>{ setTempShortBreakTime(parseInt(e.target.value))}}
                             />
                         </Grid>
 
@@ -97,58 +148,17 @@ function SettingsDialog(props) {
                                     shrink: true,
                                 }}
                                 margin="normal"
+                                error = {longBreakValueError}
+                                helperText="Value must be from 1 to 60."
                                 variant="outlined"
                                 defaultValue={longBreakTime}
-                                onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempLongBreakTime(parseInt(e.target.value)) :  setTempLongBreakTime(parseInt(longBreakTime))}}
+                                onChange={(e)=>{ setTempLongBreakTime(parseInt(e.target.value))}}
                             />
                         </Grid>
 
                     </Grid>
                     
-                    {/* <div style={{textAlign: "center"}}>
-                        <TextField
-                            label="Pomodoro Time"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-
-                            margin="normal"
-                            variant="outlined"
-                            defaultValue={pomodoroTime}
-                            onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempPomodoroTime(parseInt(e.target.value)) :  setTempPomodoroTime(parseInt(pomodoroTime))}}
-                        />
-                        <TextField
-                            label="Short Break Time"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            
-                            margin="normal"
-                            variant="outlined"
-                            defaultValue={shortBreakTime}
-                            onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempShortBreakTime(parseInt(e.target.value)) :  setTempShortBreakTime(parseInt(shortBreakTime))}}
-                        />
-                        <TextField
-                            width='sm'
-                            label="Long Break Time"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            InputProps={{
-                                inputProps: { 
-                                    max: 60, min: 1
-                                }
-                            }}
-                        
-                            margin="normal"
-                            variant="outlined"
-                            defaultValue={longBreakTime}
-                            onChange={(e)=>{ (parseInt(e.target.value) >= 1) && ((parseInt(e.target.value) <= 60)) ? setTempLongBreakTime(parseInt(e.target.value)) :  setTempLongBreakTime(parseInt(longBreakTime))}}
-                        />
-                    </div> */}
+                    
 
                     <Divider variant="middle" style={{margin: "1rem"}}/>
                         
@@ -167,11 +177,11 @@ function SettingsDialog(props) {
                                         max: 60, min: 1
                                     }
                                 }}
-                            
+                                error={longBreakIntervalValueError}
                                 margin="normal"
                                 style={{margin: ".5rem"}}
                                 defaultValue={longBreakInterval}
-                                onChange={(e)=>{ (parseInt(e.target.value) >= 1) ? setTempLongBreakInterval(parseInt(e.target.value)) :  setTempLongBreakInterval(parseInt(longBreakInterval))}}
+                                onChange={(e)=>{ setTempLongBreakInterval(parseInt(e.target.value))  }}
                             />
                         }
                     
@@ -206,7 +216,7 @@ function SettingsDialog(props) {
             </DialogContent>
 
             <DialogActions>
-                <Button onClick={updateValues} color="primary">
+                <Button onClick={onSave} color="primary">
                     Save
                 </Button>
             </DialogActions>
